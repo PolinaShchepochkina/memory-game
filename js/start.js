@@ -55,6 +55,17 @@ export function startGame(cardsNumber) {
 
   cards.forEach((card, index) => card.addEventListener('click', () => {
     if (clickable == true && !card.classList.contains('success')) {
+
+      timerId = setInterval(() => {
+        time -= 1;
+        timer.textContent = `Осталось времени: ${time} секунд`;
+
+        if (time === 0) {
+          clearInterval(timerId);
+          createPopup('Время вышло!', 'В главное меню', createGameMenu);
+        }
+      }, 1000);
+
       card.classList.add('flipped');
 
       if (firstCard == null) {
@@ -95,14 +106,4 @@ export function startGame(cardsNumber) {
       }
     }
   }));
-
-  timerId = setInterval(() => {
-    time -= 1;
-    timer.textContent = `Осталось времени: ${time} секунд`;
-
-    if (time === 0) {
-      clearInterval(timerId);
-      createPopup('Время вышло!', 'В главное меню', createGameMenu);
-    }
-  }, 1000);
 };
