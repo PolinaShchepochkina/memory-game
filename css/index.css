@@ -6,7 +6,7 @@
     background: radial-gradient(at top, #FEFFFF, #c6c6c6);
     max-width: 1920px;
     height: fit-content;
-    margin: 0 20px;
+    margin: 0 20px 120px;
 }
 
 .header {
@@ -107,14 +107,12 @@
     border-radius: 5px;
     transition: all 0.2s linear;
     margin: 5px;
-    transform: scale(-1, 1);
 }
 
 .game__card i {
     font-size: 40px;
     display: none;
     color: white;
-    transform: scale(-1, 1);
 }
 
 .game__card i+i {
