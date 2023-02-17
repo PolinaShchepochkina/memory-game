@@ -7,7 +7,7 @@ export function createGameMenu() {
 
   const chooseDifficulty = document.querySelector('.game');
   chooseDifficulty.innerHTML = '';
-  // document.querySelector('.congrats').innerHTML = '';
+  document.querySelector('.confetti').innerHTML = '';
 
   const form = document.createElement('form');
   let input = document.createElement('input');
@@ -21,21 +21,25 @@ export function createGameMenu() {
   button.classList.add('game__form-button');
   button.textContent = 'Начать игру';
 
+  input.addEventListener('input', function () {
+    let cardsNumber = parseInt(input.value);
+
+    if (cardsNumber % 2 !== 0 || cardsNumber < 2 || cardsNumber > 10) {
+      button.classList.remove('game__form-button-active');
+    } else {
+      button.classList.add('game__form-button-active');
+    }
+  });
+
   button.addEventListener('click', function () {
     let cardsNumber = parseInt(input.value);
 
     if (cardsNumber % 2 !== 0 || cardsNumber < 2 || cardsNumber > 10) {
-      input.value = ''
+      input.value = '';
     } else {
-      button.classList.add('active');
       startGame(cardsNumber);
     }
   });
 
-  chooseDifficulty.append(
-    title,
-    form,
-    input,
-    button
-  )
-}
+  chooseDifficulty.append(title, form, input, button);
+};

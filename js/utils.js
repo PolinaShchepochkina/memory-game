@@ -65,7 +65,8 @@ export function createCardsIconsArray(count) {
       return cardsIcons;
     default:
       break;
-  }
+  };
+
   return cardsIcons;
 };
 

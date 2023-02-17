@@ -1,11 +1,15 @@
 import { createGameCard } from './card.js';
 import { createGameMenu } from './menu.js';
+import { createPopup } from './popup.js';
 import { createCardsIconsArray, duplicateArray, shuffle } from './utils.js';
+import { confetti } from './confetti.js';
 
 export function startGame(cardsNumber) {
   let firstCard = null;
   let secondCard = null;
   let clickable = true;
+  let time = 60;
+  let timerId = null;
 
   const gameSection = document.querySelector('.game');
   gameSection.innerHTML = '';
@@ -16,6 +20,7 @@ export function startGame(cardsNumber) {
   restartButton.classList.add('game__back-button');
   restartButton.textContent = 'Сыграть ещё раз';
   restartButton.addEventListener('click', () => {
+    clearInterval(timerId);
     startGame(cardsNumber);
   });
 
@@ -23,8 +28,13 @@ export function startGame(cardsNumber) {
   returnToMenuButton.classList.add('game__back-button');
   returnToMenuButton.textContent = 'К выбору сложности';
   returnToMenuButton.addEventListener('click', () => {
+    clearInterval(timerId);
     createGameMenu();
   });
+
+  const timer = document.createElement('div');
+  timer.classList.add('game__timer');
+  timer.textContent = `Осталось времени: ${time} секунд`;
 
   const cardsIcons = createCardsIconsArray(cardsNumber);
   const duplicatedCardsIcons = duplicateArray(cardsIcons);
@@ -36,6 +46,7 @@ export function startGame(cardsNumber) {
 
   gameSection.append(
     gameBoard,
+    timer,
     restartButton,
     returnToMenuButton
   );
@@ -65,6 +76,11 @@ export function startGame(cardsNumber) {
             firstCard = null;
             secondCard = null;
             clickable = true;
+            if (cards.length === document.querySelectorAll('.success').length) {
+              clearInterval(timerId);
+              document.querySelector('.confetti').innerHTML = confetti;
+              createPopup('Вы выиграли!', 'В главное меню', createGameMenu);
+            }
           }, 400);
         } else {
           setTimeout(() => {
@@ -72,10 +88,21 @@ export function startGame(cardsNumber) {
             cards[secondCard].classList.remove('flipped');
             firstCard = null;
             secondCard = null;
+
             clickable = true;
           }, 400);
         }
       }
     }
   }));
-}
+
+  timerId = setInterval(() => {
+    time -= 1;
+    timer.textContent = `Осталось времени: ${time} секунд`;
+
+    if (time === 0) {
+      clearInterval(timerId);
+      createPopup('Время вышло!', 'В главное меню', createGameMenu);
+    }
+  }, 1000);
+};

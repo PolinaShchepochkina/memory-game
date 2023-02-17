@@ -1,11 +1,12 @@
 @import url(../vendor/fonts/fonts.css);
+@import url(./confetti.css);
 
 .page {
     font-family: 'Orpheus', Arial, Helvetica, sans-serif;
     background: radial-gradient(at top, #FEFFFF, #c6c6c6);
     max-width: 1920px;
     height: fit-content;
-    margin: 0;
+    margin: 0 20px;
 }
 
 .header {
@@ -38,7 +39,7 @@
 
 .game__title {
     font-size: 35px;
-    margin: 0 0 45px;
+    margin: 20px 0 45px;
     background-image: linear-gradient(90deg, steelblue, rgb(164, 214, 254));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -67,7 +68,7 @@
     color: slategrey;
 }
 
-.game__form-button:hover {
+.game__form-button-active {
     background: linear-gradient(#f0e76e, yellowgreen);
     color: #F5F0E5;
 }
@@ -88,7 +89,7 @@
     border: 1px solid slategrey;
     background: transparent;
     color: slategrey;
-    margin-bottom: 10px;
+    margin-top: 10px;
 }
 
 .game__back-button:hover {
@@ -144,4 +145,41 @@
 
 .game__card:hover {
     background: linear-gradient(#e1cfb6, #a59a90);
+}
+
+.game__timer {
+    color: indianred;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.popup {
+    visibility: hidden;
+}
+
+.popup__content {
+    display: flex;
+    position: absolute;
+    visibility: visible;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    height: 200px;
+    border-radius: 10px;
+    top: 30%;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    font-family: Arial, Helvetica, sans-serif;
+    color: steelblue;
+    font-size: 25px;
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.popup__button {
+    border: 1px solid slategrey;
+    background: linear-gradient(#f0e76e, yellowgreen);
+    width: 150px;
+    height: 30px;
 }
